@@ -1,0 +1,28 @@
+
+<!-- 
+   <div>
+    <h2>Team Details</h2>
+    <ul>
+      <li *ngFor="let member of team">
+        {{ member.first_name }} {{ member.last_name }} - {{ member.domain }}
+      </li>
+    </ul>
+  </div>
+-->
+
+<div class="container">
+    <h2>Team Details</h2>
+    <div class="team-members">
+      <div class="team-member" *ngFor="let member of team">
+        <img [src]="member.avatar" alt="Member Avatar">
+        <div class="member-details">
+          <h3>{{ member.first_name }} {{ member.last_name }}</h3>
+          <p>{{ member.email }}</p>
+          <p>{{ member.domain }}</p>
+          <p>Availability: {{ member.available? 'Available' : 'Not Available' }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  

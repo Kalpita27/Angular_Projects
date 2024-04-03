@@ -1,0 +1,19 @@
+h1 {
+    text-align: center;
+  }
+  
+  nav {
+    background-color: #4fb2f4;
+    padding: 10px;
+  }
+  
+  nav a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #333;
+  }
+  
+  nav a.active {
+    font-weight: bold;
+  }
+  

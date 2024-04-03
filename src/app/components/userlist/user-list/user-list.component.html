@@ -1,0 +1,66 @@
+<div class="container">
+    <h2>User List</h2>
+    <!-- Search and Filters -->
+    <!-- Search input -->
+    <input class="input" type="text" placeholder="Search by Name" [(ngModel)]="searchText" (keyup)="applyFilters()">
+    
+    <!-- Filters -->
+    <div class="filters">
+      <label>Domain:</label>
+      <select [(ngModel)]="selectedDomain" (change)="applyFilters()">
+        <option value="">All</option>
+        <option *ngFor="let domain of domains" [value]="domain">{{ domain }}</option>
+      </select>
+    
+      <label>Gender:</label>
+      <select [(ngModel)]="selectedGender" (change)="applyFilters()">
+        <option value="">All</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+      </select>
+    
+      <label>Available:</label>
+      <input type="checkbox" [(ngModel)]="selectedavailable" (change)="applyFilters()"> Available
+    </div>
+    
+    <!-- User Cards -->
+    <div class="user-cards">
+      <div class="user-card" *ngFor="let user of pagedUsers">
+        <img [src]="user.avatar" alt="User Avatar">
+        <div class="user-details">
+          <h3>{{ user.first_name }} {{ user.last_name }}</h3>
+          <p>{{ user.email }}</p>
+          <p>{{ user.domain }}</p>
+          <p>{{ user.gender }}</p>
+          <p>Availability: {{ user.available ? 'Available' : 'Not Available' }}</p>
+          <button [disabled]="user.selected || !isUserSelectable(user)" (click)="addToTeam(user)">Add to Team</button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Pagination -->
+    <div class="pagination">
+      <button (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>&nbsp;
+     <span>{{ currentPage }}</span> &nbsp;
+      <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+    </div>
+  
+    <!-- Team Details -->
+    <div class="team-details" *ngIf="team.length > 0">
+      <h2>Team Details</h2>
+      <div class="team-member" *ngFor="let member of team">
+        <img [src]="member.avatar" alt="Team Member Avatar">
+        <div class="member-details">
+          <h3>{{ member.first_name }} {{ member.last_name }}</h3>
+          <p>Email: {{ member.email }}</p>
+          <p>Domain: {{ member.domain }}</p>
+          <p>available: {{ member.available ? 'Available' : 'Not Available' }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Create Team Button -->
+    <button class="team" (click)="createTeam()">Create Team</button>
+
+  </div>
+  
